@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<br lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报告管理</title>
+</head>
+<body>
+<a href="/dbscript/all/{{ pj_id }}/1">入库管理</a>
+<a href="/algorithm/all/{{ pj_id }}/1">算法管理</a>
+<a>报告管理</a>
+</body>
+<br>
+<body>
+<a href="/report/insert/{{ pj_id }}">新增报告</a>
+<table border="1" align="center">
+    <tr align="center">
+        <td>id</td>
+        <td>定时报告名称</td>
+        <td>当前运行状态</td>
+        <td>相关操作</td>
+    </tr>
+    {% for report in page %}
+        <tr align="center">
+            <td>{{ report.id }}</td>
+            <td>{{ report.report_name }}</td>
+            {% if report.report_status %}
+                <td>运行中</td>
+                {#                <td><a href="/report/start/{{ report.id }}/1/{{ pj_id }}">启动</a></td>#}
+            {% else %}
+                <td>未运行</td>
+                {#                <td><a href="/report/stop/{{ report.id }}/0/{{ pj_id }}">停止</a></td>#}
+            {% endif %}
+            <td><a href="/report/select/{{ report.id }}">详情</a></td>
+        </tr>
+    {% endfor %}
+
+    <tr align="center">
+        <td align="center">
+            {% if page.has_previous %}
+                <a href="/report/all/{{ pj_id }}/{{ page.previous_page_number }}">上一页</a>
+            {% endif %}
+            {% for pindex in page.paginator.page_range %}
+                {% if pindex == page.number %}
+                    {{ pindex }}
+                {% else %}
+                    <a href="/report/all/{{ pj_id }}/{{ pindex }}">{{ pindex }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page.has_next %}
+                <a href="/report/all/{{ pj_id }}/{{ page.next_page_number }}">下一页</a>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+<a href="/project/all/1">返回</a>
+<table border="1" align="center">
+    <tr align="center">
+        <td>已存在定时任务</td>
+    </tr>
+    {% for b in a %}
+        <tr align="center">
+            <td>{{ b }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工程信息</title>
+</head>
+<body>
+<a href="{% url 'project:insert_project' %}">创建工程</a>
+<table border="1" align="center">
+    <tr align="center">
+        <td>id</td>
+        <td>工程名字</td>
+        <td>详情</td>
+    </tr>
+    {% for project in page %}
+        <tr align="center">
+            <td>{{ project.id }}</td>
+            <td><a href="/dbscript/all/{{ project.id }}/1">{{ project.project_name }}</a></td>
+            <td><a href="/project/select/{{ project.id }}">详情</a></td>
+        </tr>
+    {% endfor %}
+    <tr align="center">
+        <td align="center">
+            {% if page.has_previous %}
+                <a href="/project/all/{{ page.previous_page_number }}">上一页</a>
+            {% endif %}
+            {% for pindex in page.paginator.page_range %}
+                {% if pindex == page.number %}
+                    {{ pindex }}
+                {% else %}
+                    <a href="/project/all/{{ pindex }}">{{ pindex }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page.has_next %}
+                <a href="/project/all/{{ page.next_page_number }}">下一页</a>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+</body>
+</html>

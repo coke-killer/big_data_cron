@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建定时入库脚本</title>
+</head>
+<body>
+{#<div class="login_top clearfix">#}
+{#    <a href="index.html" class="login_logo"><img src="../../static/images/logo02.png"></a>#}
+{#</div>#}
+<div class="login_form_bg">
+    <div class="login_form_wrap clearfix">
+        <div class="login_banner fl"></div>
+        {#        <div class="slogan fl">日夜兼程 · 急速送达</div>#}
+        <div class="login_form fr">
+            <div class="login_title clearfix">
+                <h1>创建定时入库脚本</h1>
+                {#					<a href="#">立即注册</a>#}
+            </div>
+            <div class="form_input">
+                {# 不设置表单action时，提交表单时，会向浏览器地址栏中的地址提交数据 #}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" value="{{ pj_id }}" name="pj_id" hidden="hidden">
+                    <ul>
+                        <li> 版 本：<input type="text" name="version" class="version_input" placeholder="请输入入库脚本的版本">
+                            <div class="name_error">{{ name_error }}</div>
+                        </li>
+                        <li>简 介：<input type="text" name="information" class="pass_input" placeholder="请输入入库脚本的描述信息">
+                            <div class="info_error">{{ info_error }}</div>
+                        </li>
+                        <li> 创建人：<input type="text" name="creater" class="creater_input" placeholder="请输入入库脚本的创建人">
+                            <div class="user_error">{{ creater_error }}</div>
+                        </li>
+                        <li>运行方式：<input type="text" name="timeset" class="creater_input" placeholder="请输入入库脚本的运行信息">
+                            <div class="user_error">{{ creater_error }}</div>
+                        </li>
+                        <li>
+                            <label>上传文件:</label>
+                            <input type="file" name="dbscript_file"><br>
+                            <span class="error_tip">{{ errmsg }}</span>
+                        </li>
+                        <li class="reg_sub">
+                            <input type="submit" value="提交" name="">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ errmsg }}
+</body>
+</html>

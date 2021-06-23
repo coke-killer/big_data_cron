@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报告详情</title>
+</head>
+<body>
+<table border="1" align="center">
+    <tr align="center">
+        <td>报告id</td>
+        <td>报告名字</td>
+        <td>报告版本</td>
+        <td>报告创建时间</td>
+        <td>报告创建人</td>
+        <td>报告描述信息</td>
+        <td>是否在运行状态</td>
+        <td>报告存储路径</td>
+        <td>报告定时规则</td>
+        <td>报告所属工程</td>
+        <td>相关操作</td>
+    </tr>
+    <tr align="center">
+        <td>{{ re_info.id }}</td>
+        <td>{{ re_info.report_name }}</td>
+        <td>{{ re_info.report_version }}</td>
+        <td>{{ re_info.report_creatime }}</td>
+        <td>{{ re_info.report_creater }}</td>
+        <td>{{ re_info.report_information }}</td>
+        <td>{{ re_info.report_status }} </td>
+        <td>{{ re_info.report_root }}</td>
+        <td>{{ re_info.report_timeset }}</td>
+        <td>{{ pj_info.project_name }}</td>
+        <td><a href="/report/start/{{ re_info.id }}">启动</a>
+            <a href="/report/stop/{{ re_info.id }}">停止</a>
+            <a href="/report/delete/{{ pj_info.id }}/{{ re_info.id }}">删除</a>
+        </td>
+    </tr>
+</table>
+<a href="/report/all/{{ pj_info.id }}/1">返回</a>
+<div align="center">
+    <form action="/report/update/" method="post">
+        <input type="text" name="pj_id" class="id" value="{{ pj_info.id }}" hidden="hidden">
+        <input type="text" name="re_id" class="id" value="{{ re_info.id }}" hidden="hidden">
+        版 本：<input type="text" name="version" class="pass_input" value="{{ re_info.report_version }}"> <br>
+        创建 人：<input type="text" name="creater" class="creater_input" value="{{ re_info.report_creater }}"> <br>
+        定时规则：<input type="text" name="timeset" class="name_input" value="{{ re_info.report_timeset }}"> <br>
+        <input type="submit" value="修改">
+    </form>
+</div>
+{{ errmsg }}
+</body>
+</html>

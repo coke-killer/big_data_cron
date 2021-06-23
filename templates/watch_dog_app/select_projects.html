@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工程详情</title>
+</head>
+<body>
+<table border="1" align="center">
+    <tr align="center">
+        <td>工程id</td>
+        <td>工程名字</td>
+        <td>工程信息</td>
+        <td>工程创建者</td>
+        <td>工程创建时间</td>
+        <td>工程目录</td>
+        <td>相关操作</td>
+    </tr>
+    <tr align="center">
+        <td>{{ pj_info.id }}</td>
+        <td>{{ pj_info.project_name }}</td>
+        <td>{{ pj_info.project_information }}</td>
+        <td>{{ pj_info.project_creater }}</td>
+        <td>{{ pj_info.project_creatime }} </td>
+        <td>{{ pj_info.project_root }}</td>
+        <td><a href="/project/delete/{{ pj_info.id }}">删除</a>
+        </td>
+    </tr>
+</table>
+<a href="{% url 'project:all_project' pg=1 %}">返回</a>
+<div align="center">
+    <form action="/project/update/" method="post">
+        <input type="text" name="id" class="id" value="{{ pj_info.id }}" hidden="hidden">
+        名  字：<input type="text" name="name" class="name_input" value="{{ pj_info.project_name }}"> <br>
+        信  息：<input type="text" name="information" class="pass_input" value="{{ pj_info.project_information }}"> <br>
+        创建人：<input type="text" name="creater" class="creater_input" value="{{ pj_info.project_creater }}"> <br>
+        <input type="submit" value="修改">
+    </form>
+</div>
+{{ errmsg }}
+</body>
+</html>

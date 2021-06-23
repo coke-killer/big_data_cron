@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>入库脚本详情</title>
+</head>
+<body>
+<table border="1" align="center">
+    <tr align="center">
+        <td>入库脚本id</td>
+        <td>入库脚本名字</td>
+        <td>入库脚本版本</td>
+        <td>入库脚本创建时间</td>
+        <td>入库脚本创建人</td>
+        <td>入库脚本描述信息</td>
+        <td>是否在运行状态</td>
+        <td>入库脚本存储路径</td>
+        <td>入库脚本定时规则</td>
+        <td>入库脚本所属工程</td>
+        <td>相关操作</td>
+    </tr>
+    <tr align="center">
+        <td>{{ db_info.id }}</td>
+        <td>{{ db_info.dbscript_name }}</td>
+        <td>{{ db_info.dbscript_version }}</td>
+        <td>{{ db_info.dbscript_creatime }}</td>
+        <td>{{ db_info.dbscript_creater }}</td>
+        <td>{{ db_info.dbscript_information }}</td>
+        <td>{{ db_info.dbscript_status }} </td>
+        <td>{{ db_info.dbscript_root }}</td>
+        <td>{{ db_info.dbscript_timeset }}</td>
+        <td>{{ pj_info.project_name }}</td>
+        <td><a href="/dbscript/start/{{ db_info.id }}">启动</a>
+            <a href="/dbscript/stop/{{ db_info.id }}">停止</a>
+            <a href="/dbscript/delete/{{ pj_info.id }}/{{ db_info.id }}">删除</a>
+        </td>
+    </tr>
+</table>
+<a href="/dbscript/all/{{ pj_info.id }}/1">返回</a>
+<div align="center">
+    <form action="/dbscript/update/" method="post">
+        <input type="text" name="pj_id" class="id" value="{{ pj_info.id }}" hidden="hidden">
+        <input type="text" name="db_id" class="id" value="{{ db_info.id }}" hidden="hidden">
+        版 本：<input type="text" name="version" class="pass_input" value="{{ db_info.dbscript_version }}"> <br>
+        创建 人：<input type="text" name="creater" class="creater_input" value="{{ db_info.dbscript_creater }}"> <br>
+        定时规则：<input type="text" name="timeset" class="name_input" value="{{ db_info.dbscript_timeset }}"> <br>
+        <input type="submit" value="修改">
+    </form>
+</div>
+{{ errmsg }}
+</body>
+</html>
